@@ -1,0 +1,10 @@
+{
+  "description": "A web application that presents the design and features specified in the provided Markdown file, helping users access its intended information and functionality.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
