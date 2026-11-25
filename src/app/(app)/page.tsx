@@ -1,20 +1,49 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { ChevronRight, Clock, FlaskConical, HeartPulse, Info } from "lucide-react";
 import { Alert } from "@/components/Alert";
 import { Card } from "@/components/Card";
-import { DUMMY_HOME_SUMMARY, DUMMY_PROFILE } from "@/lib/dummy-data";
+import { getCurrentUserProfile } from "@/lib/auth/getCurrentUserProfile";
+import { formatIndonesianDateHeader } from "@/lib/auth/profile";
+import { DUMMY_HOME_SUMMARY } from "@/lib/dummy-data";
+
+async function WelcomeHeader() {
+  const current = await getCurrentUserProfile();
+  const firstName = current?.firstName ?? "Pengguna";
+  const initials = current?.initials ?? "RC";
+  const todayLabel = formatIndonesianDateHeader();
+
+  return (
+    <div className="welcome">
+      <div>
+        <p className="eyebrow">{todayLabel}</p>
+        <h2>Selamat datang, {firstName}</h2>
+        <p>Berikut ringkasan kesehatan ginjal Anda.</p>
+      </div>
+      <div className="avatar" aria-label={`Inisial ${initials}`}>
+        {initials}
+      </div>
+    </div>
+  );
+}
 
 export default function HomePage() {
   return (
     <div className="page">
-      <div className="welcome">
-        <div>
-          <p className="eyebrow">{DUMMY_PROFILE.greetingDate}</p>
-          <h2>Selamat pagi, {DUMMY_PROFILE.firstName}</h2>
-          <p>Berikut ringkasan kesehatan ginjal Anda.</p>
-        </div>
-        <div className="avatar">{DUMMY_PROFILE.initials}</div>
-      </div>
+      <Suspense
+        fallback={
+          <div className="welcome">
+            <div>
+              <p className="eyebrow">RenalCare</p>
+              <h2>Selamat datang</h2>
+              <p>Memuat ringkasan kesehatan ginjal Anda...</p>
+            </div>
+            <div className="avatar">..</div>
+          </div>
+        }
+      >
+        <WelcomeHeader />
+      </Suspense>
 
       <Alert
         variant="warning"

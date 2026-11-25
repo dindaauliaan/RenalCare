@@ -10,6 +10,7 @@ import {
   HeartPulse,
   Home,
 } from "lucide-react";
+import type { ReactNode } from "react";
 
 const NAV_ITEMS = [
   { href: "/", label: "Beranda", mobileLabel: "Beranda", icon: Home },
@@ -50,7 +51,7 @@ export function SidebarNav() {
   );
 }
 
-export function Topbar() {
+export function Topbar({ rightSlot }: { rightSlot?: ReactNode }) {
   const pathname = usePathname();
   const title = getPageTitle(pathname);
 
@@ -60,9 +61,12 @@ export function Topbar() {
         <p className="eyebrow">RenalCare</p>
         <h1>{title}</h1>
       </div>
-      <Link href="/tanda-bahaya" className="emergency-btn">
-        <AlertTriangle size={19} strokeWidth={1.8} /> <span>Tanda Bahaya / IGD</span>
-      </Link>
+      <div className="topbar-actions">
+        {rightSlot}
+        <Link href="/tanda-bahaya" className="emergency-btn">
+          <AlertTriangle size={19} strokeWidth={1.8} /> <span>Tanda Bahaya / IGD</span>
+        </Link>
+      </div>
     </header>
   );
 }
