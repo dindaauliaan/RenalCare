@@ -528,13 +528,14 @@ main.shell-main {
 
 .meter i {
   position: absolute;
-  left: 47%;
   top: -4px;
-  width: 4px;
+  width: 6px;
   height: 16px;
+  transform: translateX(-50%);
   background: var(--ink);
   border: 2px solid #fff;
   border-radius: 3px;
+  transition: left 0.25s ease;
 }
 
 .explain {
@@ -1745,8 +1746,9 @@ details textarea {
     font-size: 12px;
   }
 
-  .row-actions button:last-child {
-    display: none;
+  .row-actions button {
+    width: 32px;
+    height: 32px;
   }
 
   .modal {
@@ -2178,6 +2180,259 @@ details textarea {
 
 @media (max-width: 520px) {
   .choice-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   13. LAB STATES, STAGE BADGES, ACUTE ILLNESS & CONFIRM MODAL
+   ========================================================================== */
+.empty-lab-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  background: var(--soft);
+  color: var(--soft-ink);
+  display: grid;
+  place-items: center;
+  margin: 0 auto 14px;
+}
+
+.empty-lab-desc {
+  max-width: 460px;
+  margin: 0 auto 22px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.chart-empty {
+  height: 220px;
+  border-radius: 12px;
+  background: #f8fafc;
+  border: 1px dashed var(--line);
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 12px;
+  padding: 20px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.chart-empty p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.acute-banner {
+  margin-top: 12px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  background: #fff9e8;
+  border: 1px solid #f3dc9c;
+  color: #735514;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.acute-banner svg {
+  flex: 0 0 auto;
+}
+
+.lab-row-card {
+  border-top: 1px solid #e5e7eb;
+  padding: 15px 0;
+}
+
+.lab-row-card .lab-row {
+  border-top: 0;
+  padding: 0;
+}
+
+.lab-date-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.stage-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--soft);
+  color: var(--soft-ink);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.lab-row-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.acute-note-pill,
+.critical-note-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.acute-note-pill {
+  background: #fff9e8;
+  border: 1px solid #f3dc9c;
+  color: #735514;
+}
+
+.critical-note-pill {
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  color: var(--red);
+  font-weight: 600;
+}
+
+.ref-note-text {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.text-danger {
+  color: var(--red);
+}
+
+.confirm-modal {
+  width: min(460px, 100%);
+}
+
+.skeleton-block {
+  width: 100%;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background-size: 200% 100%;
+}
+
+/* ==========================================================================
+   14. HOME DASHBOARD EMPTY & NEW-USER GUIDE STATES
+   ========================================================================== */
+.soft-badge.critical {
+  background: #fef2f2;
+  color: var(--red);
+  border: 1px solid #fecaca;
+}
+
+.home-onboarding-guide {
+  background: color-mix(in srgb, var(--soft) 32%, white);
+  border-color: #8dcbd1;
+  display: grid;
+  gap: 16px;
+}
+
+.guide-head {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.guide-head h3 {
+  margin-bottom: 4px;
+}
+
+.guide-head p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.first-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.first-step-item {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.first-step-item:hover {
+  border-color: var(--teal);
+  background: color-mix(in srgb, var(--soft) 24%, white);
+}
+
+.step-num {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--soft);
+  color: var(--soft-ink);
+  font: 800 13px var(--font-manrope), "Manrope", sans-serif;
+  display: grid;
+  place-items: center;
+}
+
+.first-step-item div {
+  flex: 1;
+}
+
+.first-step-item b {
+  display: block;
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.first-step-item small {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+  line-height: 1.35;
+}
+
+.first-step-item svg {
+  color: var(--teal);
+  flex: 0 0 auto;
+}
+
+.home-empty-card {
+  display: grid;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.home-empty-desc {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .first-steps-grid {
     grid-template-columns: 1fr;
   }
 }

@@ -55,8 +55,10 @@ export function getFirstName(fullName?: string | null, email?: string | null): s
 
 export function formatIndonesianDateHeader(date = new Date()): string {
   return new Intl.DateTimeFormat("id-ID", {
+    timeZone: "Asia/Jakarta",
     weekday: "long",
     day: "numeric",
     month: "long",
+    year: "numeric",
   }).format(date);
 }

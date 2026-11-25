@@ -11,7 +11,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import type { LabMetricTab, TrendPoint } from "@/lib/dummy-data";
+import type { LabMetricTab, LabTrendPoint } from "@/lib/labs/processing";
 
 const emptySubscribe = () => () => {};
 
@@ -40,7 +40,7 @@ function LatestPointDot({ cx, cy, index, value, dataLength, showBadge }: CustomD
     <g>
       <circle cx={cx} cy={cy} r={6} fill="#ffffff" stroke="#167d8d" strokeWidth={3.5} />
       {showBadge && isLast && typeof value === "number" && (
-        <g transform={`translate(${cx - 32}, ${cy - 44})`}>
+        <g transform={`translate(${cx - 28}, ${cy - 40})`}>
           <rect width={56} height={28} rx={8} fill="#0f5e6b" />
           <text
             x={28}
@@ -64,7 +64,7 @@ export function TrendChart({
   unit,
   domain,
 }: {
-  data: TrendPoint[];
+  data: LabTrendPoint[];
   metric: LabMetricTab;
   unit: string;
   domain: [number, number];
@@ -75,7 +75,7 @@ export function TrendChart({
   return (
     <div
       className="chart-wrap"
-      aria-label={`Grafik tren ${metric} dari bulan April hingga September`}
+      aria-label={`Grafik tren ${metric}`}
     >
       {!isClient ? (
         <div
@@ -88,7 +88,7 @@ export function TrendChart({
         />
       ) : (
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={data} margin={{ top: 18, right: 14, left: -12, bottom: 0 }}>
+          <AreaChart data={data} margin={{ top: 26, right: 20, left: -12, bottom: 0 }}>
             <defs>
               <linearGradient id="renalTrendArea" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="#167d8d" stopOpacity={0.22} />
@@ -98,7 +98,7 @@ export function TrendChart({
 
             {isEgfr && (
               <>
-                <ReferenceArea y1={90} y2={120} fill="#dcfce7" fillOpacity={0.6} ifOverflow="extendDomain" />
+                <ReferenceArea y1={90} y2={domain[1]} fill="#dcfce7" fillOpacity={0.6} ifOverflow="extendDomain" />
                 <ReferenceArea y1={60} y2={90} fill="#ecfccb" fillOpacity={0.55} ifOverflow="extendDomain" />
                 <ReferenceArea y1={45} y2={60} fill="#fef9c3" fillOpacity={0.65} ifOverflow="extendDomain" />
                 <ReferenceArea y1={30} y2={45} fill="#fef08a" fillOpacity={0.45} ifOverflow="extendDomain" />
@@ -109,7 +109,7 @@ export function TrendChart({
 
             <CartesianGrid stroke="#cbd5e1" strokeDasharray="4 5" vertical={false} />
             <XAxis
-              dataKey="month"
+              dataKey="label"
               axisLine={false}
               tickLine={false}
               tick={{ fill: "#475569", fontSize: 11 }}
@@ -121,7 +121,7 @@ export function TrendChart({
               axisLine={false}
               tickLine={false}
               tick={{ fill: "#475569", fontSize: 11 }}
-              width={40}
+              width={44}
             />
             <Tooltip
               contentStyle={{
@@ -129,6 +129,13 @@ export function TrendChart({
                 border: "1px solid #d1d5db",
                 fontSize: 13,
                 boxShadow: "0 6px 18px rgba(30,41,59,0.08)",
+              }}
+              labelFormatter={(_label, payload) => {
+                const point = payload?.[0]?.payload as LabTrendPoint | undefined;
+                if (!point) return String(_label);
+                return point.isAcuteIllness
+                  ? `${point.fullDate} (Saat sakit akut)`
+                  : point.fullDate;
               }}
               formatter={(val) => [`${val} ${unit}`, metric]}
             />
