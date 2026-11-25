@@ -23,8 +23,14 @@ function LabLoadingFallback() {
   );
 }
 
-async function LabPageContent() {
-  const supabase = await createClient();
+async function LabPageContent({
+  searchParams,
+}: {
+  searchParams: Promise<{ catat?: string }>;
+}) {
+  const [{ catat }, supabase] = await Promise.all([searchParams, createClient()]);
+  const defaultOpenModal = catat === "1";
+
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -54,13 +60,22 @@ async function LabPageContent() {
     );
   }
 
-  return <LabView initialLabs={data ?? []} />;
+  return (
+    <LabView
+      initialLabs={data ?? []}
+      defaultOpenModal={defaultOpenModal}
+    />
+  );
 }
 
-export default function LabPage() {
+export default function LabPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ catat?: string }>;
+}) {
   return (
     <Suspense fallback={<LabLoadingFallback />}>
-      <LabPageContent />
+      <LabPageContent searchParams={searchParams} />
     </Suspense>
   );
 }

@@ -340,15 +340,17 @@ function DeleteConfirmModal({
 export function LabView({
   initialLabs,
   initialError = null,
+  defaultOpenModal = false,
 }: {
   initialLabs: LabResult[];
   initialError?: string | null;
+  defaultOpenModal?: boolean;
 }) {
   const router = useRouter();
   const [labs, setLabs] = useState<LabResult[]>(initialLabs);
   const [modalState, setModalState] = useState<
     { open: false } | { open: true; editing: LabResult | null }
-  >({ open: false });
+  >(defaultOpenModal ? { open: true, editing: null } : { open: false });
   const [deleteTarget, setDeleteTarget] = useState<LabRowDisplay | null>(null);
   const [deleteError, setDeleteError] = useState<string | null>(null);
   const [isDeleting, startDeleteTransition] = useTransition();

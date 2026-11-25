@@ -2558,3 +2558,67 @@ details textarea {
     gap: 8px;
   }
 }
+
+/* ==========================================================================
+   16. AGENDA & REMINDERS CRUD STYLES
+   ========================================================================== */
+.type-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.agenda-textarea {
+  height: 84px !important;
+  padding: 10px 12px !important;
+  resize: vertical;
+}
+
+.date-block.overdue {
+  height: 60px;
+  display: grid;
+  place-items: center;
+  background: #fef2f2;
+  color: var(--red);
+}
+
+.status.overdue {
+  background: #fef2f2;
+  color: var(--red);
+  border: 1px solid #fecaca;
+}
+
+.schedule-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.type-pill {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 10px;
+  background: #f1f5f9;
+  color: var(--muted);
+}
+
+.schedule-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+@media (max-width: 720px) {
+  .type-choice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .schedule-actions {
+    grid-column: 1 / -1;
+    justify-content: space-between;
+  }
+}
