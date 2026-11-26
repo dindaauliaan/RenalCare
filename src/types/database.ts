@@ -11,6 +11,7 @@ export type ProfileMode = "ckd" | "post_aki";
 export type BpArm = "left" | "right";
 export type BpPosition = "sitting" | "standing" | "lying";
 export type ReminderType = "lab" | "control" | "medication";
+export type ArticleReviewStatus = "pending" | "verified";
 
 export interface Database {
   public: {
@@ -177,11 +178,14 @@ export interface Database {
           summary: string | null;
           body: string | null;
           source: string | null;
+          source_org: string | null;
           source_url: string | null;
           reviewed_at: string | null;
           reviewer: string | null;
           read_minutes: number | null;
           published: boolean | null;
+          review_status: ArticleReviewStatus;
+          language: string | null;
         };
         Insert: {
           id?: string;
@@ -191,11 +195,14 @@ export interface Database {
           summary?: string | null;
           body?: string | null;
           source?: string | null;
+          source_org?: string | null;
           source_url?: string | null;
           reviewed_at?: string | null;
           reviewer?: string | null;
           read_minutes?: number | null;
           published?: boolean | null;
+          review_status?: ArticleReviewStatus;
+          language?: string | null;
         };
         Update: {
           id?: string;
@@ -205,11 +212,14 @@ export interface Database {
           summary?: string | null;
           body?: string | null;
           source?: string | null;
+          source_org?: string | null;
           source_url?: string | null;
           reviewed_at?: string | null;
           reviewer?: string | null;
           read_minutes?: number | null;
           published?: boolean | null;
+          review_status?: ArticleReviewStatus;
+          language?: string | null;
         };
         Relationships: [];
       };

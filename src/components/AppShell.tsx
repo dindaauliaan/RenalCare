@@ -75,7 +75,9 @@ export function AppShell({ children }: { children: ReactNode }) {
           </div>
         </Link>
 
-        <SidebarNav />
+        <Suspense fallback={<nav aria-label="Navigasi utama" />}>
+          <SidebarNav />
+        </Suspense>
 
         <Link href="/tanda-bahaya" className="side-emergency">
           <AlertTriangle size={22} strokeWidth={1.8} />
@@ -103,20 +105,24 @@ export function AppShell({ children }: { children: ReactNode }) {
       </aside>
 
       <main className="shell-main">
-        <Topbar
-          rightSlot={
-            <Suspense fallback={null}>
-              <TopbarMobileAuthAction />
-            </Suspense>
-          }
-        />
+        <Suspense fallback={<header className="topbar" />}>
+          <Topbar
+            rightSlot={
+              <Suspense fallback={null}>
+                <TopbarMobileAuthAction />
+              </Suspense>
+            }
+          />
+        </Suspense>
         <div className="content">{children}</div>
         <footer className="shell-footer">
           RenalCare adalah alat pemantau dan edukasi, bukan pengganti dokter.
         </footer>
       </main>
 
-      <BottomNav />
+      <Suspense fallback={null}>
+        <BottomNav />
+      </Suspense>
     </div>
   );
 }

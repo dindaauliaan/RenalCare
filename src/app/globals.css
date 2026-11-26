@@ -2622,3 +2622,89 @@ details textarea {
     justify-content: space-between;
   }
 }
+
+/* =========================================================
+   EDUKASI SERVER-SIDE ENHANCEMENTS (11C)
+   ========================================================= */
+.chips button {
+  cursor: pointer;
+}
+
+.search-clear-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 999px;
+}
+
+.search-clear-btn:hover {
+  background: var(--soft);
+  color: var(--ink);
+}
+
+.article-card-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.article-source-text {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+.review-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  width: fit-content;
+}
+
+.review-badge.pending {
+  background: var(--warn-bg);
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+.review-badge.verified {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.article-detail-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.article-review-alert {
+  margin-top: 16px;
+}
+
+.article-source-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--teal-dark);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.article-source-link:hover {
+  color: var(--teal);
+}
