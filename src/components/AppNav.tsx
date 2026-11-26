@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  AlertTriangle,
   BookOpen,
   Calendar,
   FlaskConical,
@@ -27,6 +26,7 @@ function isRouteActive(pathname: string, href: string) {
 
 function getPageTitle(pathname: string) {
   if (pathname.startsWith("/tanda-bahaya")) return "Tanda Bahaya";
+  if (pathname.startsWith("/profil")) return "Profil & Hak Data";
   const matched = NAV_ITEMS.find((item) => isRouteActive(pathname, item.href));
   return matched?.label ?? "Tanda Bahaya";
 }
@@ -61,12 +61,7 @@ export function Topbar({ rightSlot }: { rightSlot?: ReactNode }) {
         <p className="eyebrow">RenalCare</p>
         <h1>{title}</h1>
       </div>
-      <div className="topbar-actions">
-        {rightSlot}
-        <Link href="/tanda-bahaya" className="emergency-btn">
-          <AlertTriangle size={19} strokeWidth={1.8} /> <span>Tanda Bahaya / IGD</span>
-        </Link>
-      </div>
+      {rightSlot ? <div className="topbar-actions">{rightSlot}</div> : null}
     </header>
   );
 }

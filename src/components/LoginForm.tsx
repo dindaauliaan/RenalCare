@@ -52,6 +52,8 @@ export function LoginForm() {
     router.refresh();
   };
 
+  const accountDeleted = searchParams.get("deleted") === "1";
+
   return (
     <Card className="auth-card">
       <div className="auth-head">
@@ -59,6 +61,14 @@ export function LoginForm() {
         <h1>Selamat datang kembali</h1>
         <p>Masuk untuk melihat riwayat lab, tekanan darah, dan agenda kontrol Anda.</p>
       </div>
+
+      {accountDeleted && (
+        <Alert
+          variant="warning"
+          title="Akun telah dihapus"
+          description="Akun dan seluruh data kesehatan Anda telah dihapus permanen dari RenalCare."
+        />
+      )}
 
       {serverError && (
         <Alert variant="critical" title="Gagal masuk" description={serverError} />

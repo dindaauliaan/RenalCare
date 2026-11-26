@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { Suspense, type ReactNode } from "react";
-import { AlertTriangle, HeartPulse, LogIn } from "lucide-react";
+import { AlertTriangle, ChevronRight, HeartPulse, LogIn, User } from "lucide-react";
 import { getCurrentUserProfile } from "@/lib/auth/getCurrentUserProfile";
 import { BottomNav, SidebarNav, Topbar } from "./AppNav";
+import { FooterDisclaimer } from "./FooterDisclaimer";
 import { LogoutButton } from "./LogoutButton";
 
 async function SidebarUserPanel() {
@@ -34,13 +35,18 @@ async function SidebarUserPanel() {
 
   return (
     <div className="side-profile-wrap">
-      <div className="side-profile">
+      <Link
+        href="/profil"
+        className="side-profile side-profile-link"
+        title="Buka profil dan hak data"
+      >
         <div className="avatar small">{current.initials}</div>
         <div>
           <b title={current.fullName}>{current.fullName}</b>
-          <span>{modeLabel}</span>
+          <span>{modeLabel} · Profil &amp; data</span>
         </div>
-      </div>
+        <ChevronRight size={16} strokeWidth={1.8} aria-hidden="true" />
+      </Link>
       <LogoutButton variant="sidebar" />
     </div>
   );
@@ -58,7 +64,20 @@ async function TopbarMobileAuthAction() {
     );
   }
 
-  return <LogoutButton variant="topbar" />;
+  return (
+    <>
+      <Link
+        href="/profil"
+        className="topbar-profile-btn"
+        aria-label="Profil dan hak data"
+        title="Profil & Hak Data"
+      >
+        <User size={17} strokeWidth={1.8} />
+        <span>Profil</span>
+      </Link>
+      <LogoutButton variant="topbar" />
+    </>
+  );
 }
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -115,9 +134,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           />
         </Suspense>
         <div className="content">{children}</div>
-        <footer className="shell-footer">
-          RenalCare adalah alat pemantau dan edukasi, bukan pengganti dokter.
-        </footer>
+        <FooterDisclaimer />
       </main>
 
       <Suspense fallback={null}>

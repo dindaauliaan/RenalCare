@@ -3,7 +3,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { isProfileOnboarded } from "@/lib/auth/profile";
 import type { Database } from "@/types/database";
 
-const PUBLIC_PATHS = ["/login", "/daftar", "/tanda-bahaya"];
+const PUBLIC_PATHS = ["/login", "/daftar", "/tanda-bahaya", "/privasi", "/syarat"];
 const AUTH_ONLY_PAGES = ["/login", "/daftar"];
 
 function isPublicPath(pathname: string): boolean {
@@ -74,8 +74,15 @@ export async function updateSession(request: NextRequest) {
 
   const { pathname } = request.nextUrl;
 
-  // Halaman /tanda-bahaya HARUS selalu dapat diakses tanpa login dan tanpa terblokir onboarding
-  if (pathname === "/tanda-bahaya" || pathname.startsWith("/tanda-bahaya/")) {
+  // Halaman darurat dan dokumen legal draf HARUS selalu dapat diakses tanpa login dan tanpa terblokir onboarding
+  if (
+    pathname === "/tanda-bahaya" ||
+    pathname.startsWith("/tanda-bahaya/") ||
+    pathname === "/privasi" ||
+    pathname.startsWith("/privasi/") ||
+    pathname === "/syarat" ||
+    pathname.startsWith("/syarat/")
+  ) {
     return supabaseResponse;
   }
 

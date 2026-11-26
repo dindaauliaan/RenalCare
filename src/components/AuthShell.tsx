@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { AlertTriangle, HeartPulse } from "lucide-react";
+import { FooterDisclaimer } from "./FooterDisclaimer";
 
 export function AuthShell({
   children,
@@ -31,9 +32,7 @@ export function AuthShell({
         <div className={wide ? "auth-container wide" : "auth-container"}>{children}</div>
       </main>
 
-      <footer className="shell-footer">
-        RenalCare adalah alat pemantau dan edukasi, bukan pengganti dokter.
-      </footer>
+      <FooterDisclaimer />
     </div>
   );
 }

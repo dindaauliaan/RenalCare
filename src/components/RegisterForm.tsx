@@ -141,10 +141,21 @@ export function RegisterForm() {
               </small>
             </span>
           </label>
+          <p className="register-legal-links">
+            Baca draf{" "}
+            <Link href="/privasi">Kebijakan Privasi</Link> dan{" "}
+            <Link href="/syarat">Syarat &amp; Ketentuan</Link>.
+          </p>
           {errors.consent && (
             <small className="field-error mt-1.5 block">{errors.consent.message}</small>
           )}
         </div>
+
+        <Alert
+          variant="warning"
+          title="Disclaimer Medis"
+          description="RenalCare adalah alat pemantau dan edukasi, bukan alat diagnosis medis dan bukan pengganti pemeriksaan dokter."
+        />
 
         <Button type="submit" disabled={isSubmitting} className="full-btn">
           {isSubmitting ? "Mendaftarkan akun..." : "Daftar"}
